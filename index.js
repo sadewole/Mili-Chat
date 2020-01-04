@@ -48,6 +48,11 @@ io.on('connection', (socket) => {
         })
 
         socket.join(user.room)
+        // Getting users in the room
+        io.to(user.room).emit('roomData', {
+            room: user.room,
+            users: getUsersInRoom(user.room)
+        })
 
         callback()
     })
@@ -67,6 +72,20 @@ io.on('connection', (socket) => {
     // Disconnect user
     socket.on('disconnect', () => {
         console.log('User disconnected')
+        // remove user when disconnected
+        const user = removeUser(socket.id)
+
+        if (user) {
+            // return admin and others users in the room
+            io.to(user.room).emit('message', {
+                user: 'admin',
+                text: `${user.name} has left`
+            })
+            io.to(user.room).emit('roomData', {
+                room: user.room,
+                users: getUsersInRoom(user.room)
+            })
+        }
     })
 })
 
