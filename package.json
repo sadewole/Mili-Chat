@@ -1,0 +1,28 @@
+{
+  "name": "mili-chat",
+  "version": "1.0.0",
+  "description": "A simple chat app with web socket",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "cd client && npm run client",
+    "start:dev": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "keywords": [
+    "Nodejs",
+    "Express",
+    "Web",
+    "Socket",
+    "React",
+    "Redux"
+  ],
+  "author": "Samador",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^5.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
+}
